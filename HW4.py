@@ -1,6 +1,6 @@
 import random
 
-words = ['apple','bread','candy','dream','eagle','flame','grape','house','input','joker',"nigga"]
+words = ['apple','bread','candy','dream','eagle','flame','grape','house','input','joker']
 x = random.random()
 y = x * len(words)
 secret_word = words[int(y)]
