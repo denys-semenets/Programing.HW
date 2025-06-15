@@ -1,43 +1,57 @@
 import random
+words = ['apple', 'bread', 'candy', 'dream', 'eagle', 'flame', 'grape', 'house', 'input', 'joker']
 
-words = ['apple','bread','candy','dream','eagle','flame','grape','house','input','joker']
-x = random.random()
-y = x * len(words)
-secret_word = words[int(y)]
+def generate(words):
+    return random.choice(words)
 
-tries = 6
-wl = len(secret_word)
-w = secret_word
+def start(words,tries =6):
+    secret_word = generate(words)
+    word_length = len(secret_word)
+    print("Welcome to Wordle!", f"\nGuess the {word_length} -letter word. You have {tries} tries.")
 
-print("Welcome to Wordle!", f"\nGuess the {wl} -letter word. You have {tries} tries.")
+    while tries!=0:
+        guess = input("Attempt "+str(7 - tries)+"/6 – Enter guess: ").lower()
+        if not guess.isalpha():
+            print("Enter a letter")
+            continue
+        if len(guess)!=word_length:
+            print(f"Wrong length. Expected {word_length} letter words, got {len(guess)} " )
+            continue
 
-while tries!=0:
-    guess = input("Attempt "+str(7 - tries)+"/6 – Enter guess: ").lower()
-    
-    if len(guess)!=wl:
-        print(f"Wrong length. Expected {wl} letter words, got {len(guess)} " )
-        continue
-
-    if guess==w:
-        print("You win!!!")
-        break
-
-
-    display=[]
-    j=0
-    while j<wl:
-        s = guess[j]
-        if s == w[j]:
-            display.append(f"[{s.upper()}]")
-        elif s in w:
-            display.append(f"({s})")
-        else:
-            display.append(s)
-        j+=1
+        if guess== secret_word:
+            print("You win!!!")
+            break
 
 
-    print("Result:", ' '.join(display))
-    tries += - 1
-else:
-    final = secret_word
-    print("You lose! The word was:", final)
+        display=[]
+        j=0
+        while j<word_length:
+            s = guess[j]
+            if s == secret_word[j]:
+                display.append(f"[{s.upper()}]")
+            elif s in secret_word:
+                display.append(f"({s})")
+            else:
+                display.append(s)
+            j+=1
+
+        print("Result:", ' '.join(display))
+        tries += - 1
+    else:
+        final = secret_word
+        print("You lose! The word was:", final)
+
+
+
+def again():
+
+    while True:
+        start(words)
+
+        again = input("Again? enter: yes/no ").lower()
+        if again != 'yes':
+            print("os.remove")
+            break
+
+if __name__ == "__main__":
+    again()
