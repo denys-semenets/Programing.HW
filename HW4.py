@@ -50,7 +50,7 @@ def again():
 
         again = input("Again? enter: yes/no ").lower()
         if again != 'yes':
-            print("os.remove")
+            print("оs.remоve :)")
             break
 
 if __name__ == "__main__":
