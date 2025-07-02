@@ -3,7 +3,7 @@
 import pandas as pd
 import yfinance as yf
 
-data= yf.Ticker("gold")
+data= yf.Ticker("GLD")
 df = pd.DataFrame(data.history(period="5y"))
 
 df = df.drop(["Dividends","Stock Splits"],axis=1)
@@ -28,7 +28,7 @@ money = 100000
 shares =0
 for i in range(len(df_trade)):
     if df_trade.sign[i] =="Buy":
-        shares = money/df_trade.Open[i]
+        shares = int(money/df_trade.Open[i])
         money = money - shares*df_trade.Open[i]
     elif df_trade.sign[i] =="Sell":
         money += shares*df_trade.Open[i]
